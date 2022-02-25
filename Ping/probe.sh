@@ -63,7 +63,7 @@ basic_auth_users:
     admin: SECRET
 EOF
 
-sed -i "s/SECRET/$SECRET/g" /usr/dockerapp/monitor/prometheus/web.yml
+sed -i "s!SECRET!$SECRET!g" /usr/dockerapp/monitor/prometheus/web.yml
 
 cat > /usr/dockerapp/monitor/prometheus/prometheus.yml << EOF
 global:
@@ -322,5 +322,7 @@ modules:
 EOF
 
 docker-compose -f /usr/dockerapp/monitor/docker-compose.yml up -d
+
+rm -rf /root/bcrypt
 
 echo "done"
