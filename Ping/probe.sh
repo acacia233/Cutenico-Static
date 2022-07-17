@@ -24,6 +24,7 @@ services:
     image: prom/prometheus
     container_name: prometheus
     hostname: prometheus
+    restart: unless-stopped
     volumes:
       - /usr/dockerapp/monitor/prometheus:/etc/prometheus/
     environment:
@@ -39,6 +40,7 @@ services:
     image: prom/blackbox-exporter:v0.16.0
     container_name: blackbox
     hostname: black-exporter
+    restart: unless-stopped
     volumes:
       - /usr/dockerapp/monitor/blackbox/blackbox.yml:/config/blackbox.yml
     command:
